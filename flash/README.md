@@ -4,7 +4,7 @@ Rebirth / Repentance's debug console for the original Flash game
 ([Steam app 113200](https://store.steampowered.com/app/113200/The_Binding_of_Isaac/), including Wrath of the Lamb and
 the Eternal Edition), drawn with EID's bitmap font.
 
-It is built exactly like [EID Flash](https://github.com/tomandesMSH/Flash-EID/blob/master/flash/README.md) and
+It is built exactly like [EID Flash](https://github.com/tomandesMSH/FlashTBoI-EID/blob/master/flash/README.md) and
 [Stats HUD](https://github.com/tomandesMSH/FlashTBoI-StatsHUD/blob/main/flash/README.md): players install it with the
 **patcher** (`patcher/`), which builds the modded game from their own copy, so no game files are ever distributed.
 See `patcher/README.txt` for the player instructions.

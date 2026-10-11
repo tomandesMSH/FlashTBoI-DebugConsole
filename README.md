@@ -7,7 +7,7 @@ The debug console of Rebirth / Repentance, recreated for the original Flash game
 including Wrath of the Lamb/Eternal DLC). Give yourself items, spawn enemies and pickups, teleport to any room,
 skip to any floor and toggle debug cheats.
 
-Built the same way as [EID Flash](https://github.com/tomandesMSH/Flash-EID) and
+Built the same way as [EID Flash](https://github.com/tomandesMSH/FlashTBoI-EID) and
 [Stats HUD](https://github.com/tomandesMSH/FlashTBoI-StatsHUD): a patcher builds the modded game from your own copy,
 and it works on its own or together with the other mods.
 
