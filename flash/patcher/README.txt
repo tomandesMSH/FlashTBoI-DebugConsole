@@ -86,8 +86,9 @@ Playing
 -------
 - The modded game uses the same save as the Steam version. Don't run both at the same time.
   Items given with the console don't unlock anything, but what you do afterwards counts as usual.
-- Steam achievements you unlock while playing the modded game are granted the next time you
-  start the normal Steam version.
+- Steam achievements: the launcher sends the achievements you unlock to Steam a few seconds
+  later, with the game's own FlashAchievements.exe (Steam must be running). achievements.log
+  next to the launcher shows what was sent.
 - Your game files are never modified. To uninstall, clear the Steam launch option (if you set
   it) and delete the "Debug Console" folder.
 
