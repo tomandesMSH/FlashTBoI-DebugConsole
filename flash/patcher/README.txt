@@ -45,7 +45,7 @@ your own copy into the "Debug Console" folder instead (exe: use --no-projector).
 
 Together with other mods
 ------------------------
-The TBoI Flash Mods installer (https://github.com/tomandesMSH/TBoI-FlashMods) lets you tick the
+The TBoI Flash Mods installer (https://github.com/tomandesMSH/FlashTBoI-Mods) lets you tick the
 mods you want. Or patch another mod's result instead of the original game, e.g.:
 
     Debug_Console_Patcher.exe --swf "EID Flash\isaac_eid.swf"

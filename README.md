@@ -49,7 +49,7 @@ No game files are distributed. The patcher builds the modded game from your own 
    The Binding of Isaac > Properties > General > **Launch Options**. Or start the game with
    `Debug Console\Debug Console.exe`.
 
-**With other mods:** use the [TBoI Flash Mods](https://github.com/tomandesMSH/TBoI-FlashMods) installer and tick the
+**With other mods:** use the [TBoI Flash Mods](https://github.com/tomandesMSH/FlashTBoI-Mods) installer and tick the
 mods you want, or run the patcher on another mod's result:
 
     Debug_Console_Patcher.exe --swf "EID Flash\isaac_eid.swf"
