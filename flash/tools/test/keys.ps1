@@ -1,6 +1,7 @@
 param([int]$ProcId, [string[]]$Keys, [int]$HoldMs = 80, [int]$GapMs = 250)
 # Focus the window of $ProcId and press each key (virtual-key names like SPACE, RETURN, F9, W, A, S, D, LEFT; "wait:500" pauses; "hold:W:800" holds;
-# "text:giveitem c12" types the text with the keyboard layout's keys, shift included).
+# "text:giveitem c12" types the text with the keyboard layout's keys, shift included; "click:x:y" left-clicks at
+# screen pixel x, y).
 Add-Type @"
 using System; using System.Runtime.InteropServices;
 public class KI {
@@ -9,6 +10,8 @@ public class KI {
  [DllImport("user32.dll")] public static extern void keybd_event(byte vk, byte scan, uint flags, UIntPtr extra);
  [DllImport("user32.dll")] public static extern uint MapVirtualKey(uint code, uint type);
  [DllImport("user32.dll")] public static extern short VkKeyScan(char c);
+ [DllImport("user32.dll")] public static extern bool SetCursorPos(int x, int y);
+ [DllImport("user32.dll")] public static extern void mouse_event(uint f, int x, int y, uint d, UIntPtr e);
 }
 "@
 $vk = @{ SPACE=0x20; RETURN=0x0D; ESCAPE=0x1B; LEFT=0x25; UP=0x26; RIGHT=0x27; DOWN=0x28; F=0x46; F2=0x71; F3=0x72; OEM1=0xBA; BACK=0x08; TAB=0x09; END=0x23; F5=0x74; F6=0x75; F7=0x76; F8=0x77; F9=0x78; W=0x57; A=0x41; S=0x53; D=0x44; E=0x45; Q=0x51; P=0x50 }
@@ -33,6 +36,11 @@ foreach ($k in $Keys) {
       Start-Sleep -Milliseconds 40
     }
     continue
+  }
+  if ($k -like "click:*") {
+    $p = $k.Split(":"); [KI]::SetCursorPos([int]$p[1], [int]$p[2]) | Out-Null; Start-Sleep -Milliseconds 150
+    [KI]::mouse_event(2, 0, 0, 0, [UIntPtr]::Zero); Start-Sleep -Milliseconds 60; [KI]::mouse_event(4, 0, 0, 0, [UIntPtr]::Zero)
+    Start-Sleep -Milliseconds $GapMs; continue
   }
   if ($k -like "hold:*") { $p = $k.Split(":"); Press $vk[$p[1]] ([int]$p[2]); Start-Sleep -Milliseconds $GapMs; continue }
   Press $vk[$k] $HoldMs

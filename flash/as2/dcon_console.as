@@ -1055,7 +1055,9 @@ function dconKey()
    {
       if(ch == 59 && !L.closing && _root._currentframe == 2 && _root.a.player != undefined && _root.a.onEnterFrame != undefined)
       {
-         dconOpen();
+         // opened once the room has run for a moment (dconReady): pausing a room that is still being set up and
+         // spawning into it can hang the game's spot search (posw)
+         L.pendingOpen = _root.a;
       }
       return undefined;
    }
@@ -1238,6 +1240,15 @@ _root.dconLayer.onEnterFrame = function()
    if(!this.closing && _root._currentframe == 2 && g.player != undefined && g.onEnterFrame != undefined)
    {
       dconApplyFlags(g);
+      if(this.pendingOpen == g && g.fra >= 15 && g.telf == undefined)
+      {
+         this.pendingOpen = undefined;
+         dconOpen();
+      }
+   }
+   else if(_root._currentframe != 2)
+   {
+      this.pendingOpen = undefined;
    }
 };
 // ---------------- end Debug Console ----------------

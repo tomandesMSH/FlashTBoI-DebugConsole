@@ -33,7 +33,8 @@ and it works on its own or together with the other mods.
 | `clear`, `help [command]` | Clears the console, lists the commands |
 
 **Tab** completes commands, item names, rooms and floors (press again for the next match). **Up / Down** go through
-earlier commands. **Esc** or **`;`** closes the console. The game is paused while the console is open.
+earlier commands. **Esc** or **`;`** closes the console. The game is paused while the console is open. Pressed while
+a room is still loading, `;` opens the console a moment later, once the room is ready.
 
 Ids are the same as in Rebirth / Repentance for collectibles, trinkets and cards. Pills are given by color (1 - 6):
 in the Flash game a pill color only gets its effect when the first pill of that color is taken.

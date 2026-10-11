@@ -30,7 +30,9 @@ themselves when `_root.fullf.eidHost` is already set.
 
 `as2/dcon_console.as` adds `_root.dconLayer` (depth 1048510, above the other mods' overlays) and a `Key` listener.
 
-- **Opening and pausing:** `;` opens it during a run (`_root._currentframe == 2`). The game loop is the game clip's
+- **Opening and pausing:** `;` opens it during a run (`_root._currentframe == 2`), once the room has run for 15
+  frames (`fra >= 15`, no teleport pending): pausing a room that is still being set up and then spawning into it can
+  hang the game's free-spot search (`posw`), so an earlier `;` is kept and the console opens when the room is ready. The game loop is the game clip's
   `onEnterFrame` (`_root.a`, DefineSprite 6765); the console takes it off while open, so the game is paused, and
   puts it back after Esc / Enter / `;` are released (the game would read a held Esc as its pause key). The game
   only polls keys (`Key.isDown`, no listeners), so typing doesn't reach it.
