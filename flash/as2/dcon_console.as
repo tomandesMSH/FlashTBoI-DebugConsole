@@ -1039,7 +1039,7 @@ function dconChar(code, ascii)
       var p = _root.dconPunct[i];
       if(p[0] == code)
       {
-         return (Key.isDown(16) ? p[2] : p[1]).charCodeAt(0);
+         return (Key.dconIsDown(16) ? p[2] : p[1]).charCodeAt(0);
       }
       i++;
    }
@@ -1210,6 +1210,23 @@ _root.dconLayer.sug = [];
 _root.dconLayer.onKeyDown = dconKey;
 Key.addListener(_root.dconLayer);
 
+// The root timeline polls keys outside the game loop (M mutes, I changes the quality, H / F the window mode, ...),
+// so typing would trigger them. While the console is open (or closing), Key.isDown reports no keys to the game and
+// the other mods; the console reads the keys with the original (Key.dconIsDown).
+if(Key.dconIsDown == undefined)
+{
+   Key.dconIsDown = Key.isDown;
+   ASSetPropFlags(Key,"isDown",0,4);
+   Key.isDown = function(code)
+   {
+      if(_root.dconLayer.isOpen || _root.dconLayer.closing)
+      {
+         return false;
+      }
+      return Key.dconIsDown(code);
+   };
+}
+
 _root.dconLayer.onEnterFrame = function()
 {
    var g = _root.a;
@@ -1233,7 +1250,7 @@ _root.dconLayer.onEnterFrame = function()
       return undefined;
    }
    // give the game loop back once Esc / Enter / ; are released (the game would take Esc as its pause key)
-   if(this.closing && !Key.isDown(27) && !Key.isDown(13) && !Key.isDown(186))
+   if(this.closing && !Key.dconIsDown(27) && !Key.dconIsDown(13) && !Key.dconIsDown(186))
    {
       dconResume(this);
    }

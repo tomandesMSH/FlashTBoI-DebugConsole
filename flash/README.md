@@ -35,7 +35,9 @@ themselves when `_root.fullf.eidHost` is already set.
   hang the game's free-spot search (`posw`), so an earlier `;` is kept and the console opens when the room is ready. The game loop is the game clip's
   `onEnterFrame` (`_root.a`, DefineSprite 6765); the console takes it off while open, so the game is paused, and
   puts it back after Esc / Enter / `;` are released (the game would read a held Esc as its pause key). The game
-  only polls keys (`Key.isDown`, no listeners), so typing doesn't reach it.
+  only polls keys (`Key.isDown`, no listeners), but the root timeline's `onEnterFrame` keeps polling while the game
+  clip is paused (M mute, I quality, H / F window mode, ...). So while the console is open, `Key.isDown` is replaced
+  with a version that reports no keys; the console itself reads keys with the original (`Key.dconIsDown`).
 - **Keys:** `Key.getAscii()` returns the key code for punctuation keys in the Flash Player projector (186 for `;`),
   so those are mapped as on a US keyboard.
 - **Text:** EID's bitmap font, copied from an atlas into one `BitmapData`, at scale 1.6 (2 screen pixels per font
